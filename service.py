@@ -1,9 +1,11 @@
 from contextlib import contextmanager
+import random
 
 from sqlalchemy.orm import sessionmaker
 
 from Src.common import model
-from Src.common.model import LogInfo
+from Src.common.constant import RANDOM_CHAR
+from Src.common.model import LogInfo, UserInfo
 
 Session = sessionmaker(bind=model.engine)
 
@@ -39,6 +41,10 @@ class LogService(object):
         })
         with session_scope() as session:
             session.add(log)
+
+
+def get_reset_password():
+    return "".join(random.choices(RANDOM_CHAR, k=8))
 
 
 # class Message(object):
