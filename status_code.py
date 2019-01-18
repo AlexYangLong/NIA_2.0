@@ -21,7 +21,7 @@ USER_ERROR = {"code": 1001, "msg_cn": "帐号或密码错误", "msg_en": "Accoun
 USER_NOT_EXIST = {"code": 1002, "msg_cn": "用户不存在", "msg_en": "User is not existed."}
 USER_ACCOUNT_EXIST = {"code": 1003, "msg_cn": "帐户名已存在", "msg_en": "User account is already existed."}
 PASSWORD_ERROR = {"code": 1004, "msg_cn": "密码错误", "msg_en": "Password error."}
-USER_IS_NOT_ACTIVE = {"code": 1005, "msg_cn": "用户未激活", "msg_en": "User is not active."}
+USER_IS_NOT_ACTIVE = {"code": 1005, "msg_cn": "用户未激活,请联系管理员", "msg_en": "User is not active."}
 
 # 随笔相关
 ESSAY_NOT_EXIST = {"code": 1101, "msg_cn": "随笔不存在", "msg_en": "Essay is not existed."}
