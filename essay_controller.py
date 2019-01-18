@@ -5,6 +5,7 @@ from Src.common import status_code
 from Src.common.constant import ESSAY_REQUIRED_FIELD
 from Src.services.essay_service import EssayService
 from Src.utils import check_utils
+from Src.utils.decorator import login_required, user_is_active
 
 
 class EssayController(Resource):
@@ -40,12 +41,12 @@ class EssayController(Resource):
             return jsonify(status_code.FAIL)
 
     @staticmethod
+    @login_required
+    @user_is_active
     def post(eid=None):
         if not check_utils.check_param_format(request.path, [r"^/v1/bms/essay/$"]):
             return jsonify(status_code.URL_ERROR)
         user_id = session.get("user_id")
-        if not user_id:
-            return jsonify(status_code.NO_LOGIN)
         data = request.json
         if not (data and isinstance(data, dict)):
             return jsonify(status_code.JSON_PARAMS_ERROR)
@@ -67,11 +68,11 @@ class EssayController(Resource):
             return jsonify(status_code.FAIL)
 
     @staticmethod
+    @login_required
+    @user_is_active
     def put(eid=None):
         if not check_utils.check_param_format(request.path, [r"^/v1/bms/essay/([1-9][0-9]*)/$"]):
             return jsonify(status_code.URL_ERROR)
-        if not session.get("user_id"):
-            return jsonify(status_code.NO_LOGIN)
         data = request.json
         if not (data and isinstance(data, dict)):
             return jsonify(status_code.JSON_PARAMS_ERROR)
@@ -94,6 +95,8 @@ class EssayController(Resource):
             return jsonify(status_code.FAIL)
 
     @staticmethod
+    @login_required
+    @user_is_active
     def delete(eid=None):
         if not check_utils.check_param_format(request.path, [r"^/v1/bms/essay/$"]):
             return jsonify(status_code.URL_ERROR)
