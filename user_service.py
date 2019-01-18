@@ -103,3 +103,8 @@ class UserService(object):
         with session_scope() as session:
             user = session.query(UserInfo).filter(UserInfo.id == user_id).first()
             return user.check_password(password=password)
+
+    def get_user_active(self, user_id):
+        with session_scope() as session:
+            user = session.query(UserInfo).filter(UserInfo.id == user_id).first()
+            return user.is_active
