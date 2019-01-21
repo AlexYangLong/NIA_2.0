@@ -15,7 +15,7 @@ def index():
 
 
 @app.route(r"/test/")
-@write_operate_log
+@write_operate_log(action_cn="测试", action_en="test")
 def test():
     return {"code": 200, "msg": "aaa"}
 
