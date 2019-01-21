@@ -29,14 +29,15 @@ def session_scope():
 
 class LogService(object):
     @staticmethod
-    def write_log(client_ip, action_cn, action_en, result_cn, result_en, reason=None, user_id=None):
+    def write_log(client_ip, action_cn, action_en, result_cn, result_en, reason_cn=None, reason_en=None, user_id=None):
         log = LogInfo({
             "client_ip": client_ip,
             "action_cn": action_cn,
             "action_en": action_en,
             "result_cn": result_cn,
             "result_en": result_en,
-            "reason": reason,
+            "reason_cn": reason_cn,
+            "reason_en": reason_en,
             "user_id": user_id
         })
         with session_scope() as session:
