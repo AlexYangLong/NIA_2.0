@@ -127,11 +127,12 @@ class LogInfo(BaseModel, Base):
     __tablename__ = "log_info"
     user_id = Column(Integer, ForeignKey("user_info.id"))  # 外键id
     client_ip = Column(String(16), nullable=False)  # 客户端IP
-    action_cn = Column(String(60), nullable=False)  # 操作内容中文
-    action_en = Column(String(120), nullable=False)  # 操作内容英文
+    action_cn = Column(String(60), nullable=False)  # 操作对象中文
+    action_en = Column(String(120), nullable=False)  # 操作对象英文
     result_cn = Column(String(12), nullable=False)  # 结果中文
     result_en = Column(String(12), nullable=False)  # 结果英文
-    reason = Column(String(256))  # 失败原因
+    reason_cn = Column(String(256))  # 失败原因中文
+    reason_en = Column(String(256))  # 失败原因英文
 
 
 class Essay(BaseModel, Base):
@@ -144,7 +145,7 @@ class Essay(BaseModel, Base):
     title = Column(String(120), nullable=False)  # 标题
     abstract = Column(Text)  # 摘要
     content = Column(Text, nullable=False)  # 随笔内容
-    status = Column(String(12))  # 状态
+    status = Column(Integer, default=1)  # 状态
     zan_times = Column(Integer, default=0)  # 点赞数
 
 
