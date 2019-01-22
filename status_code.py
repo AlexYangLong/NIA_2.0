@@ -30,3 +30,6 @@ ESSAY_NOT_EXIST = {"code": 1101, "msg_cn": "随笔不存在", "msg_en": "Essay i
 ESSAY_STATUS_NOT_INT = {"code": 1102, "msg_cn": "随笔状态值不是整数", "msg_en": "Essay status is not integer."}
 ESSAY_STATUS_OUT_RANGE = {"code": 1103, "msg_cn": "随笔状态值超出范围", "msg_en": "Essay status is out of range."}
 
+# 评论相关
+COMMENT_NOT_BELONG_USER = {"code": 1201, "msg_cn": "评论不属于该用户", "msg_en": "Comment don't belong this user."}
+
