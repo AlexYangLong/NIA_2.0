@@ -155,9 +155,9 @@ class Comment(BaseModel, Base):
     """
 
     __tablename__ = "comment"
-    foreign_key = Column(Integer, nullable=False)  # 其他表外键id
-    foreign_type = Column(String(16))  # 评论的种类
-    comment_con = Column(Text)  # 评论内容
+    article_id = Column(Integer, nullable=False)  # 其他表外键id
+    article_type = Column(String(16), nullable=False)  # 评论的种类
+    comment_con = Column(Text, nullable=False)  # 评论内容
     comment_id = Column(Integer)  # 自关联外键id
     comment_user = Column(Integer, ForeignKey("user_info.id"), nullable=False)  # 用户表外键id
 
