@@ -5,6 +5,7 @@ from flask import jsonify, session, request
 from Src.common import status_code
 from Src.common.service import LogService
 from Src.services.user_service import UserService
+from Src.utils import log as logger
 
 
 def login_required(func):
@@ -23,6 +24,7 @@ def login_required(func):
                 return status_code.PLEASE_LOGIN
         except Exception as ex:
             print(ex)
+            logger.error("认证失败,{}".format(ex))
             return status_code.FAIL
 
         return func(*args, **kwargs)
@@ -48,25 +50,30 @@ def write_operate_log(action_cn="", action_en=""):
     def wrapper(func):
         @wraps(func)
         def inner(*args, **kwargs):
-            # print(action_cn, action_en)
             ip = request.remote_addr
+
             result = func(*args, **kwargs)
 
             if session and session.get("user_id"):
                 user_id = session.get("user_id")
             else:
                 user_id = None
-            # 在这里操作日志
+
             if result.get("code") == status_code.SUCCESS_CODE:
                 result_cn = "成功"
                 result_en = "SUCCESS"
             else:
                 result_cn = "失败"
                 result_en = "FAIL"
-            LogService().write_log(client_ip=ip, action_cn=action_cn, action_en=action_en,
-                                   result_cn=result_cn, result_en=result_en,
-                                   reason_cn=result.get("msg_cn"), reason_en=result.get("msg_en"),
-                                   user_id=user_id)
+            # 在这里写操作日志
+            try:
+                LogService().write_log(client_ip=ip, action_cn=action_cn, action_en=action_en,
+                                       result_cn=result_cn, result_en=result_en,
+                                       reason_cn=result.get("msg_cn"), reason_en=result.get("msg_en"),
+                                       user_id=user_id)
+            except Exception as ex:
+                print(ex)
+                logger.error("写操作日志失败,{}".format(ex))
             return jsonify(result)
 
         return inner
