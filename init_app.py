@@ -3,6 +3,7 @@ from flask import Flask
 from flask_restful import Api
 
 from Src.conf.config import ROOT_DIR, DevelopConfig
+from Src.controllers.comment_controller import CommentController
 from Src.controllers.essay_controller import EssayController
 from Src.controllers.user_controller import RegisterController, LoginController, UserInfoController, UserPwdController, \
     ResetPwdController
@@ -25,5 +26,6 @@ def create_app():
     api.add_resource(UserPwdController, r"/v1/bms/user/password/")
     api.add_resource(ResetPwdController, r"/v1/bms/user/<int:uid>/password/")
     api.add_resource(EssayController, r"/v1/bms/essay/<int:eid>/", r"/v1/bms/essay/")
+    api.add_resource(CommentController, r"/v1/bms/comment/", r"/v1/bms/comment/<int:cid>/")
 
     return app
